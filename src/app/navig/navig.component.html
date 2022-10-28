@@ -1,0 +1,49 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar>Alumnos</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="form-alumnos">Nuevo alumno</a>
+      <a
+        mat-list-item
+        routerLink="lista-alumnos"
+        routerLinkActive="Active"
+        ariaCurrentWhenActive="page"
+        >Listado</a
+      >
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>coderMouse</span>
+      <span class="spacer"></span>
+      <mat-icon aria-label="Home icon">home</mat-icon>
+      <a
+        routerLink="home"
+        routerLinkActive="Active"
+        ariaCurrentWhenActive="page"
+        >Home</a
+      >
+      <a mat-list-item (click)="onLogin()">Log in</a>
+    </mat-toolbar>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+    <!-- necesito un contenedor acá para setear el padding etc. -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

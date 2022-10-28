@@ -1,0 +1,68 @@
+<form [formGroup]="alumnoForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="alumnoTitle">
+    <mat-card-header>
+      <mat-card-title>Datos del alumno</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Id" formControlName="id" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Nombre" formControlName="nombre" />
+            <mat-error
+              *ngIf="alumnoForm.controls['nombre'].hasError('required')"
+            >
+              El nombre es un dato <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Apellido" formControlName="apellido" />
+            <mat-error
+              *ngIf="alumnoForm.controls['apellido'].hasError('required')"
+            >
+              El apellido del alumno es un dato <strong>requerido</strong>
+            </mat-error>
+            <mat-hint align="end">Como figura en DNI</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea
+              matInput
+              placeholder="E-mail"
+              formControlName="email"
+            ></textarea>
+            <mat-error
+              *ngIf="alumnoForm.controls['email'].hasError('required')"
+            >
+              Sí, el e-mail también es un dato <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Edad" formControlName="edad" />
+            <mat-error *ngIf="alumnoForm.controls['edad'].hasError('required')">
+              Edad es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
