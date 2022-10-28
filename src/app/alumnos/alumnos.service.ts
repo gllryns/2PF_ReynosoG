@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, throwError, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { Alumno } from './model/alumno';
-import { environment } from 'src/environments/environment';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable, throwError, of } from "rxjs";
+import { catchError, map } from "rxjs/operators";
+import { Alumno } from "./model/alumno";
+import { environment } from "src/environments/environment";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AlumnosService {
-  private alumnosUrl = environment.baseUrl + 'alumnos';
+  private alumnosUrl = environment.baseUrl + "alumnos";
 
   constructor(private http: HttpClient) {}
 
@@ -20,18 +20,19 @@ export class AlumnosService {
   }
 
   getAlumno(id: string | null): Observable<Alumno> {
-    if (id === '') {
+    if (id === "") {
       return of(this.initializeAlumno());
     }
     const url = `${this.alumnosUrl}/${id}`;
     return this.http.get<Alumno>(url).pipe(catchError(this.handleError));
   }
 
-  createAlumno(alumno: Alumno): Observable<Alumno> {
-    alumno.id = '';
+  createAlumno(alumno: Alumno) {
+    alumno.id = "";
     return this.http
       .post<Alumno>(this.alumnosUrl, alumno)
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(this.handleError))
+      .subscribe(console.log);
   }
 
   deleteAlumno(id: string): Observable<{}> {
@@ -60,10 +61,10 @@ export class AlumnosService {
 
   private initializeAlumno(): Alumno {
     return {
-      id: '',
-      nombre: '',
-      apellido: '',
-      email: '',
+      id: "",
+      nombre: "",
+      apellido: "",
+      email: "",
       edad: 0,
     };
   }
