@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { Component, OnInit } from "@angular/core";
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
+import { Observable } from "rxjs";
+import { map, shareReplay } from "rxjs/operators";
+import { Sesion } from "../models/sesion";
+import { SesionService } from "../core/services/sesion.service";
 
 @Component({
-  selector: 'app-navig',
-  templateUrl: './navig.component.html',
-  styleUrls: ['./navig.component.css'],
+  selector: "app-navig",
+  templateUrl: "./navig.component.html",
+  styleUrls: ["./navig.component.css"],
 })
-export class NavigComponent {
+export class NavigComponent implements OnInit {
+  sesion$!: Observable<Sesion>;
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
@@ -16,8 +19,14 @@ export class NavigComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private sesionService: SesionService
+  ) {}
   onLogin(): void {
-    alert('El futuro log in es por acá!');
+    alert("El futuro log in es por acá!");
+  }
+  ngOnInit(): void {
+    this.sesion$ = this.sesionService.obtenerSesion();
   }
 }

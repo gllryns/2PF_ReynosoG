@@ -1,19 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { AutenticacionRoutingModule } from './autenticacion-routing.module';
-import { AutenticacionComponent } from './autenticacion.component';
-import { LoginComponent } from './login/login.component';
-
-
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
+import { AutenticacionRoutingModule } from "./autenticacion-routing.module";
+import { LoginComponent } from "./components/login/login.component";
+import { SharedModule } from "../shared/shared.module";
 @NgModule({
-  declarations: [
-    AutenticacionComponent,
-    LoginComponent
-  ],
+  declarations: [LoginComponent],
   imports: [
     CommonModule,
-    AutenticacionRoutingModule
-  ]
+    AutenticacionRoutingModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
-export class AutenticacionModule { }
+export class AutenticacionModule {}
