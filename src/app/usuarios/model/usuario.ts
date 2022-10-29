@@ -5,4 +5,6 @@ export interface Usuario {
   admin: boolean;
   canLoad: boolean;
   canActivateChild: boolean;
+  perfil?: string;
+  email?: string;
 }

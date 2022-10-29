@@ -7,4 +7,6 @@ export interface Curso {
   fechaFin: Date;
   inscripcionAbierta: boolean;
   imagen: string;
+  cantidadDeHoras?: number;
+  cantidadDeClases?: number;
 }

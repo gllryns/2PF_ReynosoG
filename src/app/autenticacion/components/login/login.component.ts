@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { SesionService } from "src/app/core/services/sesion.service";
-import { Usuario } from "src/app/models/usuario";
+import { Usuario } from "src/app/usuarios/model/usuario";
 
 @Component({
   selector: "app-login",

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
-import { Curso } from "src/app/models/curso";
+import { Curso } from "src/app/cursos/model/curso";
 import { CursoService } from "src/app/cursos/services/curso.service";
 import { Router } from "@angular/router";
 

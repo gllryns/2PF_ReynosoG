@@ -14,7 +14,7 @@ import {
   throwError,
 } from "rxjs";
 import { environment } from "src/environments/environment";
-import { Curso } from "../../models/curso";
+import { Curso } from "../model/curso";
 
 @Injectable()
 export class CursoService {
