@@ -12,6 +12,10 @@ const routes: Routes = [
   { path: 'form-alumnos', component: FormAlumnosComponent },
   { path: 'lista-alumnos', component: ListaAlumnosComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'cursoss', loadChildren: () => import('./cursoss/cursoss.module').then(m => m.CursossModule) },
+  { path: 'autenticacion', loadChildren: () => import('./autenticacion/autenticacion.module').then(m => m.AutenticacionModule) },
+  { path: 'usuarios', loadChildren: () => import('./usuarios/usuarios.module').then(m => m.UsuariosModule) },
+  { path: 'cursos', loadChildren: () => import('./cursos/cursos.module').then(m => m.CursosModule) },
 ];
 
 @NgModule({
