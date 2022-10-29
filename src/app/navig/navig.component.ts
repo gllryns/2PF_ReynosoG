@@ -11,6 +11,8 @@ import { SesionService } from "../core/services/sesion.service";
   styleUrls: ["./navig.component.css"],
 })
 export class NavigComponent implements OnInit {
+  sesion: Sesion = { sesionActiva: false };
+
   sesion$!: Observable<Sesion>;
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -23,10 +25,11 @@ export class NavigComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private sesionService: SesionService
   ) {}
-  onLogin(): void {
-    alert("El futuro log in es por acá!");
-  }
+
   ngOnInit(): void {
     this.sesion$ = this.sesionService.obtenerSesion();
+  }
+  onLogout(): void {
+    this.sesionService.logout();
   }
 }

@@ -1,16 +1,17 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { FormAlumnosComponent } from "./alumnos/form-alumnos/form-alumnos.component";
-import { ListaAlumnosComponent } from "./alumnos/lista-alumnos/lista-alumnos.component";
-import { HomeComponent } from "./home/home.component";
 
+import { HomeComponent } from "./home/home.component";
+import { InicioComponent } from "./core/components/inicio/inicio.component";
+import { PaginaNoEncontradaComponent } from "./core/components/pagina-no-encontrada/pagina-no-encontrada.component";
+import { AutenticacionGuard } from "./core/guards/autenticacion.guard";
 const routes: Routes = [
   {
-    path: "",
-    component: HomeComponent,
+    path: "inicio",
+    component: InicioComponent,
+    canActivate: [AutenticacionGuard],
   },
-  { path: "form-alumnos", component: FormAlumnosComponent },
-  { path: "lista-alumnos", component: ListaAlumnosComponent },
+
   { path: "home", component: HomeComponent },
   {
     path: "autenticacion",
@@ -19,6 +20,12 @@ const routes: Routes = [
         (m) => m.AutenticacionModule
       ),
   },
+  {
+    path: "alumnos",
+    loadChildren: () =>
+      import("./alumnos/alumnos.module").then((m) => m.AlumnosModule),
+  },
+
   {
     path: "usuarios",
     loadChildren: () =>
@@ -29,6 +36,8 @@ const routes: Routes = [
     loadChildren: () =>
       import("./cursos/cursos.module").then((m) => m.CursosModule),
   },
+  { path: "", redirectTo: "inicio", pathMatch: "full" },
+  { path: "**", component: PaginaNoEncontradaComponent },
 ];
 
 @NgModule({

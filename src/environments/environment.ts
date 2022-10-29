@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://6347689bdb76843976ab0aef.mockapi.io/api/v1',
+  baseUrl: "https://6347689bdb76843976ab0aef.mockapi.io/api/v1",
+  api: "https://635b1749aa7c3f113db5b06a.mockapi.io",
 };
 
 /*

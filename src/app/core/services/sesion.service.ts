@@ -24,6 +24,11 @@ export class SesionService {
 
     this.sesionSubject.next(sesion);
   }
+  logout() {
+    const sesion: Sesion = {
+      sesionActiva: false,
+    };
+  }
 
   obtenerSesion(): Observable<Sesion> {
     return this.sesionSubject.asObservable();

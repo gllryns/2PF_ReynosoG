@@ -6,7 +6,7 @@ import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatToolbarModule } from "@angular/material/toolbar";
-
+import { MatCardModule } from "@angular/material/card";
 import { LayoutModule } from "@angular/cdk/layout";
 import { MatTableModule } from "@angular/material/table";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -22,6 +22,7 @@ import { AlumnosModule } from "./alumnos/alumnos.module";
 import { UsuariosModule } from "./usuarios/usuarios.module";
 import { CoreModule } from "./core/core.module";
 import { AutenticacionModule } from "./autenticacion/autenticacion.module";
+import { CursoService } from "./cursos/services/curso.service";
 
 @NgModule({
   declarations: [AppComponent, NavigComponent, HomeComponent],
@@ -40,13 +41,14 @@ import { AutenticacionModule } from "./autenticacion/autenticacion.module";
     HttpClientModule,
     MatTableModule,
     FormsModule,
+    MatCardModule,
     CoreModule,
     SharedModule,
     AlumnosModule,
     UsuariosModule,
     AutenticacionModule,
   ],
-  providers: [MatTableDataSource],
+  providers: [MatTableDataSource, CursoService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

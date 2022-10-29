@@ -7,65 +7,95 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink=""
+        ><span class="material-icons" style="margin-right: 10px">home</span
+        >Home</a
+      >
+      <div *ngIf="sesion$ | async as sesion">
+        <div *ngIf="sesion.sesionActiva">
+          <a mat-list-item routerLink="cursos/inicio"
+            ><span class="material-icons" style="margin-right: 10px"
+              >school</span
+            >Cursos</a
+          >
+          <a mat-list-item routerLink="alumnos"
+            ><span class="material-icons" style="margin-right: 10px">group</span
+            >Alumnos</a
+          >
+        </div>
+      </div>
+      <br />
+      <ng-container *ngIf="sesion$ | async as sesion">
+        <div *ngIf="sesion.sesionActiva">
+          <a
+            mat-list-item
+            routerLink="usuarios"
+            *ngIf="sesion.usuarioActivo?.admin"
+            ><span class="material-icons" style="margin-right: 10px"
+              >account_circle</span
+            >Usuarios</a
+          >
+        </div>
+        <span *ngIf="sesion.sesionActiva == true">
+          <a mat-list-item
+            ><span class="material-icons" style="margin-right: 10px"
+              >logout</span
+            >Log out</a
+          ></span
+        >
+        <br />
+        <a mat-list-item routerLink="home"
+          ><span class="material-icons" style="margin-right: 10px">info</span
+          >Notas de la entrega</a
+        >
+      </ng-container>
+    </mat-nav-list>
   </mat-sidenav>
-  <ng-container *ngIf="sesion$ | async as sesion">
-    <div *ngIf="sesion.sesionActiva">
-      <mat-nav-list>
-        <a mat-list-item routerLink="form-alumnos">Nuevo alumno</a>
-        <a
-          mat-list-item
-          routerLink="lista-alumnos"
-          routerLinkActive="Active"
-          ariaCurrentWhenActive="page"
-          >Listado</a
-        >
-        <a mat-button routerLink="">Inicio</a>
-        <!-- <a mat-button routerLink="autenticacion/login">Login</a> -->
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span class="material-icons">mouse</span>
+      <span style="margin-left: 15px">coder<strong>Mouse</strong> </span>
 
-        <a mat-button routerLink="cursos/agregar">Nuevo curso</a>
-        <a
-          mat-button
-          routerLink="usuarios"
-          *ngIf="sesion.usuarioActivo?.canLoad"
-          >Usuarios</a
+      <span style="margin-left: 40px" *ngIf="sesion$ | async as sesion">{{
+        sesion.sesionActiva
+      }}</span>
+      <span class="spacer"></span>
+
+      <div *ngIf="sesion$ | async as sesion">
+        <span> {{ sesion.usuarioActivo?.usuario }}</span>
+        <span *ngIf="sesion.sesionActiva == false">
+          <a mat-list-item routerLink="autenticacion/login"
+            ><span class="material-icons" style="margin-right: 10px">login</span
+            >Log in</a
+          ></span
         >
-      </mat-nav-list>
+        <span
+          *ngIf="sesion.sesionActiva == true"
+          class="material-icons"
+          style="
+            margin-left: 10px;
+            vertical-align: middle;
+            display: inline-flex;
+          "
+        >
+          logout
+        </span>
+      </div>
+    </mat-toolbar>
+    <div>
+      <router-outlet></router-outlet>
     </div>
-
-    <mat-sidenav-content>
-      <mat-toolbar color="primary">
-        <button
-          type="button"
-          aria-label="Toggle sidenav"
-          mat-icon-button
-          (click)="drawer.toggle()"
-          *ngIf="isHandset$ | async"
-        >
-          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-        </button>
-        <span>coderMouse {{ sesion.usuarioActivo?.usuario }}</span>
-        <span class="spacer"></span>
-        <mat-icon aria-label="Home icon">home</mat-icon>
-        <a
-          routerLink="home"
-          routerLinkActive="Active"
-          ariaCurrentWhenActive="page"
-          >Home</a
-        >
-        <a mat-list-item routerLink="autenticacion/login" (click)="onLogin()"
-          >Log in</a
-        >
-      </mat-toolbar>
-    </mat-sidenav-content>
-  </ng-container>
+    <!-- necesito un contenedor acá para setear el padding etc. -->
+  </mat-sidenav-content>
 </mat-sidenav-container>
-<mat-toolbar>Alumnos</mat-toolbar>
-<mat-nav-list>
-  <a mat-button routerLink="cursos">Cursos</a>
-  <a mat-button routerLink="cursos/listar">Lista cursos</a>
-</mat-nav-list>
-
-<div>
-  <router-outlet></router-outlet>
-</div>
-<!-- necesito un contenedor acá para setear el padding etc. -->
